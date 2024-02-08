@@ -16,7 +16,6 @@ import mockData from './data/mock-data_home.json';
 function App() {
   return (
     <div className="App">
-
       <Router>
         <Header name={mockData.restaurantInfo.name} restaurantLogo={restaurantLogo}/>
         
@@ -32,7 +31,6 @@ function App() {
 
         <ActionBar />
       </Router>
-
     </div>
   );
 }

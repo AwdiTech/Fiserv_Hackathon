@@ -1,0 +1,26 @@
+.reservation {
+  padding-left: 16px;
+  padding-right: 16px;
+
+  &__titleContainer {
+    background-color: lightblue;
+    padding: 16px;
+  }
+
+  &__heroContainer {
+    padding-bottom: 10px;
+
+    &-img {
+      width: 100%;
+    }
+  }
+
+  &__content {
+    padding-bottom: 10px;
+
+    &-address {
+      display: flex;
+      justify-content: center;
+    }
+  }
+}
