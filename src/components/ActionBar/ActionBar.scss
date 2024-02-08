@@ -1,11 +1,14 @@
+@use '../../styles/variables.scss' as *;
+
 .action-bar {
+    background-color: $primary-light;
     position: fixed;
     left: 0;
     right: 0;
     bottom: 0;
     width: 100%;
     border-top: 1px solid #ccc;
-    z-index: 1000;
+    z-index: 10000;
 
     display: flex;
     justify-content: center;
