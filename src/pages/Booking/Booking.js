@@ -1,9 +1,9 @@
 import TableForm from "../../components/TableForm/TableForm";
 import RestaurantHero from "../../assets/images/restaurant-hero.jpg";
 import LocationIcon from "../../assets/icons/location.svg";
-import "./Reservation.scss";
+import "./Booking.scss";
 
-function Reservation() {
+function Booking() {
   return (
     <section className="reservation">
       <div className="reservation__titleContainer">
@@ -28,4 +28,4 @@ function Reservation() {
   );
 }
 
-export default Reservation;
+export default Booking;
