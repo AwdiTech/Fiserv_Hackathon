@@ -5,10 +5,9 @@ import "./Header.scss";
  * It utilizes the restaurant's name and logo data passed via props.
  *
  * @param {string} name - The name of the restaurant to display in the header.
+ * @param {string} restaurantLogo - The path/src of the restaurant logo image.
  */
 function Header ({ name, restaurantLogo }) {
-
-    console.log(restaurantLogo);
 
     return (
             <header className="header">
