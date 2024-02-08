@@ -15,17 +15,21 @@
         width: 24px;
         margin-bottom: 3px;
     }
-    
+
     &__title {
         margin-bottom: 4px;
         font-family: 'Arial';
         font-size: 0.75rem;
     }
-    
-        &--active {
-            border-left: 1px solid $primary-dark;
-            border-right: 1px solid $primary-dark;
-            border-top: 4px solid $primary-theme;
-            opacity: 1;
-        }
+
+    &--active {
+        border-left: 1px solid $primary-dark;
+        border-right: 1px solid $primary-dark;
+        border-top: 4px solid $primary-theme;
+        opacity: 1;
+    }
+
+    &:hover {
+        background-color: rgba($primary-theme, 0.1);
+    }
 }
