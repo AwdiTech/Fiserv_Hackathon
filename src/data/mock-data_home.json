@@ -1,0 +1,111 @@
+{
+    "restaurantInfo": {
+        "name": "Cedar & Stone Grill",
+        "address": "31-36 Leicester Square, England",
+        "logo": "cedar_stone_logo.png",
+        "heroImages": [
+            "hero_image1.png",
+            "hero_image2.png",
+            "hero_image3.png"
+        ]
+    },
+    "categories": [
+        {
+            "name": "Mains",
+            "icon": "mains_icon.png"
+        },
+        {
+            "name": "Seafood",
+            "icon": "seafood_icon.png"
+        },
+        {
+            "name": "Sides",
+            "icon": "sides_icon.png"
+        },
+        {
+            "name": "Drinks",
+            "icon": "drinks_icon.png"
+        },
+        {
+            "name": "Popular",
+            "icon": "popular_icon.png"
+        }
+    ],
+    "menuItems": [
+        {
+            "name": "Avocado Sandwich",
+            "description": "Fresh avocado on artisan bread with a hint of lemon and a touch of arugula.",
+            "price": 15,
+            "category": "Popular",
+            "image": "avocado_sandwich.png"
+        },
+        {
+            "name": "Grilled Salmon",
+            "description": "Wild-caught salmon grilled to perfection, served with asparagus and a dill cream sauce.",
+            "price": 25,
+            "category": "Seafood",
+            "image": "grilled_salmon.png"
+        },
+        {
+            "name": "Ribeye Steak",
+            "description": "Prime ribeye steak, seasoned and grilled, accompanied by garlic mashed potatoes.",
+            "price": 30,
+            "category": "Mains",
+            "image": "ribeye_steak.png"
+        },
+        {
+            "name": "Caesar Salad",
+            "description": "Crisp romaine lettuce with homemade Caesar dressing, croutons, and parmesan cheese.",
+            "price": 12,
+            "category": "Sides",
+            "image": "caesar_salad.png"
+        },
+        {
+            "name": "Craft Beer",
+            "description": "Local craft beer selection to complement your meal.",
+            "price": 8,
+            "category": "Drinks",
+            "image": "craft_beer.png"
+        },
+        {
+            "name": "Cheeseburger",
+            "description": "Classic cheeseburger with a juicy patty, cheddar cheese, and all the fixings.",
+            "price": 18,
+            "category": "Mains",
+            "image": "cheeseburger.png"
+        },
+        {
+            "name": "Lobster Bisque",
+            "description": "A creamy and rich lobster bisque with a splash of cognac.",
+            "price": 14,
+            "category": "Seafood",
+            "image": "lobster_bisque.png"
+        },
+        {
+            "name": "Chocolate Lava Cake",
+            "description": "Decadent chocolate cake with a molten chocolate center, served with vanilla ice cream.",
+            "price": 10,
+            "category": "Sides",
+            "image": "chocolate_lava_cake.png"
+        },
+        {
+            "name": "Cedar Lemonade",
+            "description": "Refreshing lemonade infused with cedar, perfect for a hot day.",
+            "price": 5,
+            "category": "Drinks",
+            "image": "cedar_lemonade.png"
+        },
+        {
+            "name": "Grilled Vegetable Platter",
+            "description": "An assortment of seasonal vegetables, grilled with a balsamic glaze.",
+            "price": 16,
+            "category": "Mains",
+            "image": "grilled_vegetables.png"
+        }
+    ],
+    "carouselImages": [
+        "carousel_image1.png",
+        "carousel_image2.png",
+        "carousel_image3.png"
+    ]
+}

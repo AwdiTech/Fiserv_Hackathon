@@ -7,14 +7,18 @@ import Home from "./pages/Home/Home.js";
 import Booking from "./pages/Booking/Booking.js";
 import Payments from "./pages/Payments/Payments.js";
 import CheckIn from "./pages/CheckIn/CheckIn.js";
+
+import restaurantLogo from "./assets/icons/restaurant_logo.png";
 import './App.scss';
+
+import mockData from './data/mock-data_home.json';
 
 function App() {
   return (
     <div className="App">
 
       <Router>
-        <Header />
+        <Header name={mockData.restaurantInfo.name} restaurantLogo={restaurantLogo}/>
         
         <main>
           <Routes>
