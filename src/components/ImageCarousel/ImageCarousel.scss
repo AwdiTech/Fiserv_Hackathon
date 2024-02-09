@@ -1,0 +1,24 @@
+// // ----- ImageCarousel Styling ----- //
+
+.slider-image {
+    height: 160px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 2px 2px 8px 2px rgba(0, 0, 0, 0.2);
+}
+
+.slider-container {
+    width: 86%;
+    margin-left: 7%;
+    margin-top: 1.85rem;
+    height: 200px;
+    border-radius: 20px;
+}
+
+.carousel {
+    border-radius: 20px;
+}
+
+.control-dots {
+    bottom: -10px !important;
+}

@@ -1,0 +1,10 @@
+// ----- FoodItemsList Styling ----- //
+
+.food-items-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 2.5rem;
+    padding-bottom: 6rem;
+}
