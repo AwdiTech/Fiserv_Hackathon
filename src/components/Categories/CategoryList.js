@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 import CategoryCard from "./CategoryCard/CategoryCard";
 import popularIcon from "../../assets/icons/popular.png";
 import mainIcon from "../../assets/icons/burger.png";
@@ -9,11 +8,22 @@ import drinksIcon from "../../assets/icons/soda.png";
 import "./CategoryList.scss";
 
 
-function CategoryList({ categories }) {
+/**
+ * Renders a list of categories with corresponding icons and handles category selection.
+ * 
+ * @param {Array} props.categories - The array of category objects.
+ * @param {Function} props.changeMenuItems - The function to change the menu items based on the selected category.
+ */
+function CategoryList({ categories, changeMenuItems }) {
 
+    // State to hold the selected category of Menu Items
     const [ selctedCategory, setSelectedCategory ] = useState("Popular");
 
-
+    /**
+     * Determines the icon based on the given icon name.
+     * @param {string} icon - The name of the icon.
+     * @returns {img} - The icon corresponding to the given name.
+     */
     const determineIcon = (icon) => {
         switch (icon) {
             case "popular_icon":
@@ -31,17 +41,26 @@ function CategoryList({ categories }) {
         }
     }
 
-    console.log(categories);
+    /**
+     * Changes the selected category and updates the menu items accordingly.
+     * 
+     * @param {string} category - The new category to be selected.
+     */
+    const changeCategory = (category) => {
+        setSelectedCategory(category);
+        changeMenuItems(category);
+    }
+
 
     return (
         <>
             <h2 className="categories-header">Categories</h2>
             <div className="category-list">
-                {categories.map((category) => <CategoryCard
-                    key={uuidv4()}
+                {categories.map((category, index) => <CategoryCard
+                    key={index}
                     name={category.name}
                     icon={determineIcon(category.icon)}
-                    handleClick={() => setSelectedCategory(category.name)}
+                    handleClick={() => changeCategory(category.name)}
                     activeCategory={selctedCategory === category.name}
                 />)}
             </div>

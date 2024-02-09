@@ -33,13 +33,6 @@
     ],
     "menuItems": [
         {
-            "name": "Avocado Sandwich",
-            "description": "Fresh avocado on artisan bread with a hint of lemon and a touch of arugula.",
-            "price": 15,
-            "category": "Popular",
-            "image": "avocado_sandwich.png"
-        },
-        {
             "name": "Grilled Salmon",
             "description": "Wild-caught salmon grilled to perfection, served with asparagus and a dill cream sauce.",
             "price": 25,
@@ -52,6 +45,13 @@
             "price": 30,
             "category": "Mains",
             "image": "ribeye_steak.png"
+        },
+        {
+            "name": "Avocado Sandwich",
+            "description": "Fresh avocado on artisan bread with a hint of lemon and a touch of arugula.",
+            "price": 15,
+            "category": "Mains",
+            "image": "avocado_sandwich.png"
         },
         {
             "name": "Caesar Salad",

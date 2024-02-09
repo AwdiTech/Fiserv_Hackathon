@@ -6,6 +6,10 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 import "./ImageCarousel.scss";
 
+/**
+ * Renders an image carousel component using the "react-responsive-carousel" npm package.
+ *
+ */
 function ImageCarousel() {
 
     const settings = {

@@ -8,15 +8,20 @@ import checkInIcon from "../../assets/icons/check-in.png";
 import "./ActionBar.scss";
 
 /**
- * ActionBar component manages the navigation bar at the bottom of the app,
+ * Renders the ActionBar component that manages the navigation bar at the bottom of the app,
  * allowing users to switch between different pages like home, cart, booking, and check-in.
- * 
  */
+
 function ActionBar() {
 
+    // State to hold the active button
     const [activeButton, setActiveButton] = useState("home");
+    
+    // Get the current location route to manage active button state
     const location = useLocation();
     const { currentPage } = location.state || { currentPage: "home" };
+
+    // Hook to navigate to different pages
     const navigate = useNavigate();
 
 
@@ -25,6 +30,12 @@ function ActionBar() {
     }, [currentPage]);
 
 
+    /**
+     * Handles the click event for navigating to different pages based on the provided title, 
+     *   along with the corresponding route information state through "currentPage" using the 
+     *   useNavigate hook.
+     * @param {string} title - The title of the page to navigate to.
+     */
     const handleClickNavigate = (title) => {
         switch (title) {
             case "Home":

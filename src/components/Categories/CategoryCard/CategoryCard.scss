@@ -8,6 +8,7 @@
     align-items: center;
     padding: 0.4rem 1.25rem;
     border: 1px solid transparent;
+    cursor: pointer;
 
     &__icon {
         width: 50px;
@@ -19,7 +20,6 @@
     }
 
     &--active {
-        cursor: pointer;
         background-color: rgba($primary-theme, 0.1);
         border: 1px solid $button-color1;
         border-radius: 10px;
