@@ -11,24 +11,24 @@
     },
     "categories": [
         {
+            "name": "Popular",
+            "icon": "popular_icon"
+        },
+        {
             "name": "Mains",
-            "icon": "mains_icon.png"
+            "icon": "mains_icon"
         },
         {
             "name": "Seafood",
-            "icon": "seafood_icon.png"
+            "icon": "seafood_icon"
         },
         {
             "name": "Sides",
-            "icon": "sides_icon.png"
+            "icon": "sides_icon"
         },
         {
             "name": "Drinks",
-            "icon": "drinks_icon.png"
-        },
-        {
-            "name": "Popular",
-            "icon": "popular_icon.png"
+            "icon": "drinks_icon"
         }
     ],
     "menuItems": [
