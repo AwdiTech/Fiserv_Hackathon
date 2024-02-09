@@ -5,36 +5,36 @@ function TableForm() {
     <form className="tableForm">
       <h3>Book a table</h3>
       <div className="tableForm__guestInfo">
-        <label className="tableForm__guestLabel">Guests</label>
-        <div className="tableForm__guestInfo-input">
-          <div>-</div>
-          <input type="number" />
-          <div>+</div>
-        </div>
+        <label className="tableForm__guestInfo-label">Guests</label>
+        <input type="number" />
       </div>
-      <div>
-        <label>Date</label>
+      <div className="tableForm__dateInfo">
+        <label className="tableForm__dateInfo-label">Date</label>
         <input type="date" />
       </div>
-      <div>
-        <label>Time</label>
+      <div className="tableForm__timeInfo">
+        <label className="tableForm__timeInfo-label">Time</label>
         <input type="time" />
       </div>
-      <section>
-        <div>
-          <label>Name</label>
+      <section className="tableForm__personalInfo">
+        <div className="tableForm__personalInfo-name">
+          <label className="tableForm__personalInfo-nameLabel">Name</label>
           <input />
         </div>
-        <div>
-          <label>Email</label>
+        <div className="tableForm__personalInfo-email">
+          <label className="tableForm__personalInfo-emailLabel">Email</label>
           <input type="email" />
         </div>
-        <div>
-          <label>Phone Number</label>
+        <div className="tableForm__personalInfo-phoneNum">
+          <label className="tableForm__personalInfo-phoneNumLabel">
+            Phone Number
+          </label>
           <input />
         </div>
-        <div>
-          <label>Notes / Special Requests</label>
+        <div className="tableForm__personalInfo-notes">
+          <label className="tableForm__personalInfo-notesLabel">
+            Notes / Special Requests
+          </label>
           <textarea />
         </div>
       </section>

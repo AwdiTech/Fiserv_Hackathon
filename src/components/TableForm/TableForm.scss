@@ -1,14 +1,40 @@
 .tableForm {
-  &__guestInfo {
+  display: flex;
+  flex-direction: column;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-bottom: 16px;
+
+  h3 {
+    font-weight: 700;
+  }
+
+  &__guestInfo, &__dateInfo, &__timeInfo {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border: 1px solid #ff6600;
     padding: 16px;
-    margin-bottom: 10px;
-    border: 1px solid orange;
+    margin-bottom: 16px;
 
-    &-input {
+    &-label {
+      font-weight: 700;
+    }
+  }
+
+  &__personalInfo {
+    padding-top: 16px;
+    padding-bottom: 16px;
+    text-align: left;
+
+    &-name, &-email, &-phoneNum, &-notes {
       display: flex;
+      flex-direction: column;
+      padding-bottom: 16px;
+    }
+
+    &-nameLabel, &-emailLabel, &-phoneNumLabel, &-notesLabel {
+      padding-bottom: 5px;
     }
   }
 }

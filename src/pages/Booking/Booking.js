@@ -3,7 +3,9 @@ import RestaurantHero from "../../assets/images/restaurant-hero.jpg";
 import LocationIcon from "../../assets/icons/location.svg";
 import "./Booking.scss";
 
-function Booking() {
+function Booking(props) {
+  const { name, address } = props;
+
   return (
     <section className="reservation">
       <div className="reservation__titleContainer">
@@ -17,10 +19,10 @@ function Booking() {
         />
       </div>
       <div className="reservation__content">
-        <h2>Cedar & Stone Grill</h2>
+        <h2>{name}</h2>
         <div className="reservation__content-address">
           <img src={LocationIcon} alt="Location Icon" />
-          <p>31-36 Leicester Square, England</p>
+          <p>{address}</p>
         </div>
       </div>
       <TableForm />
