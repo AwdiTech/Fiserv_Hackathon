@@ -1,0 +1,106 @@
+// ---- Check In Page Styling ----- //
+
+@use '../../styles/variables.scss' as *;
+
+.check-in-page {
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+    margin: 1rem 1.5rem 6rem;
+}
+
+.order-number__header, .table-number__header {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.order-number__input, .table-number__input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box; 
+}
+
+.input-button {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: $button-color1; 
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1em;
+    cursor: pointer;
+    &:hover {
+        background-color: darken(#004aad, 10%);
+    }
+}
+
+.summary {
+    border-top: 2px solid #ddd;
+    padding-top: 20px;
+    margin-bottom: 20px;
+}
+
+.order-summary__header {
+    margin-top: 2rem;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    p {
+        margin: 0;
+        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+    }
+}
+
+.check-in__button {
+    width: 100%;
+    padding: 2rem;
+    margin-bottom: 20px;
+    background-color: $button-color3;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 1.75rem;
+    cursor: pointer;
+    &:hover {
+        background-color: darken($button-color3, 10%);
+    }
+}
+
+.order-status__header {
+    text-align: center;
+}
+
+.status__unpaid,
+.status__paid-half,
+.status__paid-full,
+.status__completed {
+    text-align: center;
+    padding: 1.25rem 10px;
+    border-radius: 4px;
+    color: white;
+    margin-top: 0.5rem;
+}
+
+.status__unpaid {
+    background-color: #d9534f;
+}
+
+.status__paid-half {
+    background-color: #f0ad4e;
+}
+
+.status__paid-full {
+    background-color: #5cb85c; 
+}
+
+.status__completed {
+    background-color: #b85cb0;
+}
+
