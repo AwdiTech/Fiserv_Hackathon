@@ -5,7 +5,9 @@ import FoodItemsList from "../../components/FoodItemsList/FoodItemsList";
 import mockData from './../../data/mock-data_home.json';
 import "./Home.scss";
 
-
+/**
+ * Represents the Home component.
+ */
 function Home() {
     const [ menuItems, setMenuItems ] = useState(mockData.menuItems);
 
