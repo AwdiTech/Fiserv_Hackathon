@@ -1,0 +1,124 @@
+.order {
+    &__number {
+        margin: 2rem 0 0 5rem
+    }
+
+    &__details {
+        display: flex;
+        margin: 2rem 0 0 5rem;
+        padding: 0 0 1rem 0;
+        border-bottom: 1px solid black;
+    }
+
+    &__details-table {
+        margin: 0 10rem 0 0;
+    }
+
+    &__summary {
+        margin: 2rem 0 0 5rem;
+    }
+
+    &__items {
+        margin: 3rem 5rem 0 5rem;
+        display: flex;
+        
+        flex-direction: column;
+    }
+
+    &__items-header {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    &__row {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        align-items: center;
+    }
+
+    &__button-container {
+        display: flex;
+	border: 4px solid #404040;
+	background: #FFDC00;
+	border-radius: 10rem;
+	width: 10rem;
+	padding: 1rem;
+	justify-content: space-between;
+	align-items: center;
+	align-content: center;display: flex;
+        flex-direction: row;
+    }
+
+    &__button-right, &__button-left {
+        width: 45%;
+    }
+
+    &__count {
+        width: 25%;
+    }
+
+    &__tip {
+        display: flex;
+        margin: 5rem 5rem 0 10rem;
+        padding-bottom: 2rem;
+        border-bottom: 1px dotted black;
+    }
+
+    &__tip-option {
+        margin: 0 0 0 1.5rem;
+    }
+
+    &__bill {
+        margin: 5rem 5rem 0 10rem;
+        border-bottom: 1px dotted black;
+        padding-bottom: 2.5rem;
+        
+    }
+
+    &__subtotal {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__tip-total {
+        display: flex;
+        justify-content: space-between;;
+    }
+
+    &__service-charge {
+        display: flex;
+        justify-content: space-between;;
+    }
+
+    &__total {
+        display: flex;
+        justify-content: space-between;
+        margin: 2.5rem 5rem 0 10rem
+    }
+
+    &__total-label, &__total-price {
+        font-size: 3rem;
+    }
+
+    &__total-label {
+        margin: 0 0 0 1.5rem
+    }
+
+    &__type {
+        margin: 5rem 0 0 10rem;
+        font-size: 1.15rem;
+    }
+
+    &__type-label {
+        font-size: 20rem;
+    }
+}
+
+.hide {
+	display: none;
+}
+
+
