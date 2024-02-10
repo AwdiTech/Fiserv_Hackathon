@@ -160,13 +160,13 @@ function TableForm() {
       let cart = sessionStorage.getItem("cart");
 
       if (cart === null) {
-        alert("Reservation Canceled");
+        alert("Choose your Food");
         navigate("/");
       } else {
         sessionStorage.setItem("orderType", "Reservation");
         sessionStorage.setItem("bookingInfo", JSON.stringify(booking));
         alert("Reservation Booked");
-        navigate("/check-in");
+        navigate("/confirmation");
       }
     }
   };
