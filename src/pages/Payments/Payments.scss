@@ -1,5 +1,10 @@
 .order {
 
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+
     &__container {
         padding-bottom: 10rem;
     }
@@ -11,12 +16,17 @@
     &__details {
         display: flex;
         margin: 2rem 0 0 5rem;
-        padding: 0 0 1rem 0;
-        border-bottom: 1px solid black;
+        padding: 0 0 2rem 0;
     }
 
     &__details-table {
         margin: 0 10rem 0 0;
+    }
+
+    &__table-img, &__time-img {
+        height: 2rem; 
+        width: 2rem;
+        margin-right: 0.75rem;
     }
 
     &__summary {
@@ -34,6 +44,10 @@
         width: 100%;
         display: flex;
         justify-content: space-around;
+        background-color: #f8f4fc;
+        padding: 1rem 0.5rem 1rem 0.5rem;
+        border-top-left-radius: 4px;
+        border-top-left-radius: 4px;
     }
 
     &__row {
@@ -42,19 +56,21 @@
         justify-content: space-between;
         width: 100%;
         align-items: center;
+        border-bottom: 1px solid #cdcdcd;
+        background-color: #fffcfc;
     }
 
     &__button-container {
         display: flex;
-	border: 4px solid #404040;
-	background: #FFDC00;
-	border-radius: 10rem;
+	border: none;
+	background: #f86404;
+	border-radius: 10px;
 	width: 10rem;
-	padding: 1rem;
+	padding: 0.5rem;
 	justify-content: space-between;
 	align-items: center;
-	align-content: center;display: flex;
-        flex-direction: row;
+	align-content: center;
+        text-align: center;
     }
 
     &__button-right, &__button-left {
@@ -67,6 +83,7 @@
 
     &__tip {
         display: flex;
+        justify-content: space-around;
         margin: 5rem 5rem 0 10rem;
         padding-bottom: 2rem;
         border-bottom: 1px dotted black;
@@ -74,6 +91,11 @@
 
     &__tip-option {
         margin: 0 0 0 1.5rem;
+        background-color: #f8f4fc;
+        color: #cdcdcd;
+        font-size: 2.25rem;
+        padding: 0.5rem 1rem 1rem 1rem;
+        border-radius: 10px;
     }
 
     &__bill {
@@ -171,4 +193,28 @@
 	display: none;
 }
 
+#minus-btn, #plus-btn {
+    padding: 0.07rem 0.5rem;
+    border-radius: 50%;
+    background-color: transparent;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #3a3a3a;
+    border: 3px solid #3a3a3a;
+}
 
+#count {
+    color: white;
+    font-size: 2rem;
+}
+
+.frame {
+    margin: 0 2rem 0 0;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.frame-hidden {
+    margin: 0 2rem 0 0;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    visibility: hidden;
+}

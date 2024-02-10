@@ -1,4 +1,6 @@
 import "./Payments.scss";
+import table from '../../assets/icons/table.png'
+import time from '../../assets/icons/time.png'
 
 function Payments() {
 
@@ -9,7 +11,9 @@ function Payments() {
             <section className='order'>
                 <h1 className='order__number'>ORDER #:</h1>
                 <div className='order__details'>
+                    <img className = 'order__table-img' src = {table}></img>
                     <h2 className='order__details-table'>Table:</h2>
+                    <img className = 'order__time-img' src = {time}></img>
                     <h2 className='order__details-time'>Time:</h2>
                 </div>
             </section>
@@ -17,8 +21,23 @@ function Payments() {
 
             <section className='order__items'>
                 <div className='order__items-header'>
+                <div className ='order__details'>
                     <h1 className='order__item'>ITEM</h1>
                     <h1 className='order__price'>PRICE</h1>
+                    </div>
+                    <div class="frame-hidden">
+                        <div class="order__button-container">
+                            <div class="order__button-left">
+                                <button id="minus-btn">-</button>
+                            </div>
+                            <div class="order__count">
+                                <h1 id="count">1</h1>
+                            </div>
+                            <div class="order__button-right">
+                                <button id="plus-btn">+</button>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
                 <div className='order__row'>
@@ -124,7 +143,7 @@ function Payments() {
             </section>
 
             <form className = 'order__delivery-form'>
-            <label>Address *</label>
+            <label>Address <span className = 'order__red-font'>*</span></label>
             <input type = 'text' id = 'order__delivery-address' placeholder = 'Address'></input>
             <label>Notes / Special Requests</label>
             <textarea id = 'order__delivery-notes' placeholder = 'Enter any additional notes or special requests (e.g., Leave on patio, ring doorbell)'/>
