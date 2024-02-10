@@ -20,14 +20,14 @@
     margin-bottom: 1rem;
     border: 1px solid #ddd;
     border-radius: 4px;
-    box-sizing: border-box; // To include padding in width
+    box-sizing: border-box; 
 }
 
 .input-button {
     width: 100%;
     padding: 15px;
     margin-bottom: 20px;
-    background-color: $button-color1; // Use color from your brand palette
+    background-color: $button-color1; 
     color: white;
     border: none;
     border-radius: 4px;
@@ -62,7 +62,7 @@
     width: 100%;
     padding: 2rem;
     margin-bottom: 20px;
-    background-color: $button-color3; // Use color from your brand palette
+    background-color: $button-color3;
     color: white;
     border: none;
     border-radius: 20px;
@@ -89,18 +89,18 @@
 }
 
 .status__unpaid {
-    background-color: #d9534f; // Bootstrap 'btn-danger' color
+    background-color: #d9534f;
 }
 
 .status__paid-half {
-    background-color: #f0ad4e; // Bootstrap 'btn-warning' color
+    background-color: #f0ad4e;
 }
 
 .status__paid-full {
-    background-color: #5cb85c; // Bootstrap 'btn-warning' color
+    background-color: #5cb85c; 
 }
 
 .status__completed {
-    background-color: #b85cb0; // Bootstrap 'btn-success' color
+    background-color: #b85cb0;
 }
 
