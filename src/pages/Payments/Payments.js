@@ -5,7 +5,7 @@ function Payments() {
     
 
     return (
-        <>
+        <article className = 'order__container'>
             <section className='order'>
                 <h1 className='order__number'>ORDER #:</h1>
                 <div className='order__details'>
@@ -110,24 +110,26 @@ function Payments() {
                 <h2 classname = 'order__type-label'>Order Type</h2>
             </section>
 
-            <form className = 'order__user-form'></form>
-            <label>Name *</label>
+            <form className = 'order__user-form'>
+            <label>Name <span className = 'order__red-font'>*</span></label>
             <input type = 'text' id = 'order__user-name' placeholder = 'Enter name'></input>
-            <label>Email *</label>
+            <label>Email <span className = 'order__red-font'>*</span></label>
             <input type = 'email' id = 'order__user-email' placeholder = 'Enter Email'></input>
-            <label>Phone Number *</label>
+            <label>Phone Number <span className = 'order__red-font'>*</span></label>
             <input type = 'tel' id = 'order__user-number' placeholder = 'Enter phone number'></input>
+            </form>
 
             <section className = 'order__delivery'>
                 <h2 classname = 'order__delivery-information'>Delivery Information:</h2>
             </section>
 
-            <form className = 'order__delivery-form'></form>
+            <form className = 'order__delivery-form'>
             <label>Address *</label>
             <input type = 'text' id = 'order__delivery-address' placeholder = 'Address'></input>
             <label>Notes / Special Requests</label>
             <textarea id = 'order__delivery-notes' placeholder = 'Enter any additional notes or special requests (e.g., Leave on patio, ring doorbell)'/>
-        </>
+            </form>
+        </article>
     )
 }
 export default Payments;
