@@ -24,6 +24,37 @@
     &-label {
       font-weight: 700;
     }
+
+    &-input {
+      height: 36px;
+      padding: 0 16px;
+      border-radius: 20px;
+      border: 1px solid black;
+
+      &:focus {
+        outline: 0;
+        border: 2px solid blue;
+      }
+    }
+
+    &-invalidInput {
+      border: 1px solid red;
+      outline-width: 0;
+    }
+
+    &-errorMsg {
+      display: none;
+      font-size: 13px;
+    }
+
+    &-errorMsgInvalidInput {
+      color: red;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
   }
 
   &__personalInfo {
@@ -39,6 +70,36 @@
 
     &-nameLabel, &-emailLabel, &-phoneNumLabel, &-notesLabel {
       padding-bottom: 5px;
+    }
+
+    &-nameInp, &-emailInp, &-phoneNumInp, &-notesInp {
+      height: 36px;
+      padding: 0 16px;
+      border-radius: 20px;
+      border: 1px solid black;
+
+      &:focus {
+        outline: 0;
+        border: 2px solid blue;
+      }
+    }
+
+    &-invalidInput {
+      border: 1px solid red;
+      outline-width: 0;
+    }
+
+    &-errorMsg {
+      display: none;
+      font-size: 13px;
+    }
+
+    &-errorMsgInvalidInput {
+      color: red;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 16px;
     }
   }
 
