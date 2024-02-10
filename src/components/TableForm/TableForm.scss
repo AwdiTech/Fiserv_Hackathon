@@ -1,3 +1,5 @@
+@use "../../styles/variables" as *;
+
 .tableForm {
   display: flex;
   flex-direction: column;
@@ -7,6 +9,8 @@
 
   h3 {
     font-weight: 700;
+    text-align: center;
+    padding-bottom: 16px;
   }
 
   &__guestInfo, &__dateInfo, &__timeInfo {
@@ -35,6 +39,54 @@
 
     &-nameLabel, &-emailLabel, &-phoneNumLabel, &-notesLabel {
       padding-bottom: 5px;
+    }
+  }
+
+  &__message {
+    font-weight: 700;
+    padding-bottom: 16px;
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: space-between;
+
+    &-cancel, &-confirm {
+      background-color: $button-color3;
+      border: none;
+      padding: 0.5rem 0.75rem;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 0.8rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      cursor: pointer;
+      transition: all 0.1s ease-in-out;
+
+      &:hover {
+        background-color: darken($button-color3, 10%);
+      }
+
+      &:active {
+        transform: scale(1.1);
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    &-confirm {
+      background-color: $button-color4;
+
+      &:hover {
+        background-color: darken($button-color4, 10%);
+      }
+    }
+
+    &-cancelIcon, &-confirmIcon {
+      position: relative;
+      top: 2px;
+      margin-left: 0.25rem;
     }
   }
 }

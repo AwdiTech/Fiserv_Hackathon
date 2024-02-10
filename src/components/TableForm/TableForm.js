@@ -1,4 +1,6 @@
 import "./TableForm.scss";
+import CancelIcon from "../../assets/icons/cancel.svg";
+import ConfirmIcon from "../../assets/icons/confirm.svg";
 
 function TableForm() {
   return (
@@ -6,7 +8,7 @@ function TableForm() {
       <h3>Book a table</h3>
       <div className="tableForm__guestInfo">
         <label className="tableForm__guestInfo-label">Guests</label>
-        <input type="number" />
+        <input type="number" min="0" />
       </div>
       <div className="tableForm__dateInfo">
         <label className="tableForm__dateInfo-label">Date</label>
@@ -38,13 +40,27 @@ function TableForm() {
           <textarea />
         </div>
       </section>
-      <p>
+      <p className="tableForm__message">
         Note: 50% of payment is required upfront to reserve a table. Click
         "Confirm" to proceed to payment.
       </p>
-      <div>
-        <button>Cancel</button>
-        <button>Confirm</button>
+      <div className="tableForm__buttons">
+        <button className="tableForm__buttons-cancel">
+          Cancel
+          <img
+            src={CancelIcon}
+            alt="Cancel Icon"
+            className="tableForm__buttons-cancelIcon"
+          />
+        </button>
+        <button className="tableForm__buttons-confirm">
+          Confirm
+          <img
+            src={ConfirmIcon}
+            alt="Confirm Icon"
+            className="tableForm__buttons-confirmIcon"
+          />
+        </button>
       </div>
     </form>
   );
