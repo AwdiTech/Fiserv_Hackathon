@@ -16,9 +16,6 @@ function CheckIn() {
     const [orderTotal, setOrderTotal] = useState(0);
     const [remainingPayment, setRemainingPayment] = useState(0);
 
-    let cart = JSON.parse(sessionStorage.getItem("cart")) || {};
-
-
     // Update all states when orderNumber changes
     useEffect(() => {
 
