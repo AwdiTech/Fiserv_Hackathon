@@ -17,22 +17,21 @@ function FoodItemCard({ name, price, description, image, triggerPopUpBox }) {
      * Handles the click event for the food item card's "Add to Cart" button.
      */
     const handleClick = () => {
-        let item = sessionStorage.getItem(name);
-        let cartItem;
-        let quantity = 1;
+        // Retrieve the entire cart object from sessionStorage, or initialize an empty object if it doesn't exist
+        let cart = JSON.parse(sessionStorage.getItem("cart")) || {};
     
-        // If the item already exists in the cart, update the quantity
-        if (item) {
-            cartItem = JSON.parse(item);
-            cartItem.quantity = (cartItem.quantity || 0) + 1;
-            quantity = cartItem.quantity;
+        // Check if the item already exists in the cart. If so, add 1 to quantity, otherwise initialize it in the cart.
+        if (cart[name]) {
+            cart[name].quantity += 1;
         } else {
-            cartItem = { name: name, price: price, quantity: 1 };
+            cart[name] = { name: name, price: price, quantity: 1 };
         }
-        // Save the updated item back into sessionStorage
-        sessionStorage.setItem(name, JSON.stringify(cartItem));
-        
-        triggerPopUpBox(`${name} x ${quantity} added to cart! Go to Cart to checkout and adjust quantities.`);
+    
+        // Save the updated cart object back into sessionStorage
+        sessionStorage.setItem("cart", JSON.stringify(cart));
+    
+        // Trigger the pop-up box to show the updated item quantity
+        triggerPopUpBox(`${name} x ${cart[name].quantity} added to cart! Go to Cart to checkout and adjust quantities.`);
     }
 
 
