@@ -1,48 +1,40 @@
-* {
-    font-family: "Quicksand", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal; 
+@use '../../styles/variables.scss' as *;
+
+.order {
+    font-family: sans-serif;
 }
 
 .order {
+    margin: 1rem;
 
     &__container {
         padding-bottom: 10rem;
         font-family: "Quicksand", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
-    }
-
-    &__number {
-        margin: 2rem 0 0 1.5rem;
-        font-size: 0.85;
+        font-optical-sizing: auto;
+        font-weight: 400;
+        font-style: normal;
     }
 
     &__details {
         display: flex;
         margin: 2rem 0 0 1.5rem;
         padding: 0 0 2rem 0;
-        
+
     }
 
     &__details-table {
         margin: 0 5rem 0 0;
     }
 
-    &__table-img, &__time-img {
-        height: 2rem; 
-        width: 2rem;
-        margin-right: 0.75rem;
-    }
 
     &__summary {
-        margin: 2rem 0 0 1.5rem;
+        font-size: 1.5rem;
+        text-align: center;
+        margin-top: 2rem;
     }
 
     &__items {
-        margin: 3rem 1rem 0 1rem;
+        margin: 1.5rem 1rem 0 1rem;
         display: flex;
         flex-direction: column;
     }
@@ -67,8 +59,6 @@
         justify-content: space-between;
         background-color: #cdcdcd;
         padding: 1rem 0.5rem 1rem 1.5rem;
-        border-top-left-radius: 4px;
-        border-top-left-radius: 4px;
     }
 
     &__row {
@@ -82,21 +72,57 @@
         padding: 1rem 0 1rem 1.5rem;
     }
 
-    &__button-container {
-        display: flex;
-	border: none;
-	background: #f86404;
-	border-radius: 10px;
-	width: 7rem;
-	padding: 0.35rem;
-	justify-content: space-between;
-	align-items: center;
-	align-content: center;
-        text-align: center;
+    &__row-empty-container {
+        width: 100%;
+        align-items: center;
+        border-bottom: 1px solid #cdcdcd;
+        background-color: #f8f4fc;
+        padding: 1rem 0 1rem 1.5rem;
     }
 
-    &__button-right, &__button-left {
-        width: 55%;
+    &__row-empty {
+        font-size: 1rem;
+        padding: 1.5rem 0;
+        text-align: center;
+        margin-right: 1.5rem;
+        color: rgba($primary-dark, 0.5);
+    }
+
+    &__button-container {
+        display: flex;
+        border: none;
+        background: #f86404;
+        border-radius: 10px;
+        width: 7rem;
+        padding: 0.35rem;
+        justify-content: space-around;
+        align-items: center;
+        align-content: center;
+        text-align: center;
+
+
+        button {
+            //width: 42.5%;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            border: 2px solid $secondary-dark;
+            background-color: transparent;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #3a3a3a;
+            text-align: center;
+
+            cursor: pointer;
+
+            &:hover {
+                background-color: darken($primary-theme, 10%);
+            }
+
+            &:active {
+                transform: scale(0.95);
+            }
+        }
     }
 
     &__count {
@@ -106,30 +132,30 @@
     &__tip {
         display: flex;
         justify-content: space-around;
-        margin: 5rem 1.5rem 0 1.5rem;
-        padding-bottom: 2rem;
+        margin: 1.5rem 1.5rem 0 1.5rem;
+        padding-bottom: 1.25rem;
         border-bottom: 1px dotted black;
         align-items: center;
     }
 
     &__tip-option {
-        margin: 0 0 0 1rem;
+        margin-left: 0.25rem;
         background-color: #f8f4fc;
-        color: #cdcdcd;
+        color: rgba($primary-dark, 0.3);
         font-size: 1.15rem;
-        padding: 0.5rem 1rem 0.5rem 1rem;
+        padding: 0.5rem 0.5rem;
         border-radius: 10px;
 
         &.--selected {
-            color: black;
+            color: $primary-dark;
         }
     }
 
-    
+
 
 
     &__bill {
-        margin: 3rem 1.5rem 0 1.5rem;
+        margin: 2.25rem 1.5rem 0 1.5rem;
         border-bottom: 1px dotted black;
         padding-bottom: 2.5rem;
     }
@@ -145,53 +171,61 @@
 
     &__tip-total {
         display: flex;
-        justify-content: space-between;;
+        justify-content: space-between;
+        ;
     }
 
     &__service-charge {
         display: flex;
-        justify-content: space-between;;
+        justify-content: space-between;
+        ;
     }
 
     &__total {
         display: flex;
         justify-content: space-between;
-        margin: 2.5rem 1.5rem 0 1.5rem
+        margin: 2rem 1rem 0 1rem
     }
 
-    &__total-label, &__total-price {
+    &__total-label,
+    &__total-price {
         font-size: 1.25rem;
     }
 
     &__total-label {
-        margin: 0 0 0 1.5rem;
+        margin: 0 0 0 1rem;
+    }
+
+    &__total-price {
+        margin-right: 0.5rem;
     }
 
     &__type {
-        margin: 5rem 0 0 1.5rem;
+        margin: 3rem 0 0 1.5rem;
         font-size: 1.15rem;
     }
 
     &__type-menu {
         padding: 0.5rem 0 0 0.5rem;
-    margin: 0.5rem 0 0.5rem 0;
-    min-height: 2.75rem;
-    border-radius: 4px;
-    border: 0px;
-    border-bottom: solid 1px #c8c4cc;
-    background-color: #f8f4fc;
-    resize: none;
-    outline: none;
+        margin: 0.75rem 0 0.5rem 0;
+        min-height: 2.75rem;
+        border-radius: 4px;
+        border: 0px;
+        border-bottom: solid 1px #c8c4cc;
+        background-color: #f8f4fc;
+        resize: none;
+        outline: none;
+        width: 90%;
     }
 
     &__type-label {
-        font-size: 20rem;
+        font-size: 1.75rem;
     }
 
     &__user-form {
         display: flex;
         flex-direction: column;
-        margin: 3rem 1.5rem 0 1.5rem;
+        margin: 1.5rem 1.5rem 0 1.5rem;
     }
 
     &__red-font {
@@ -203,18 +237,39 @@
         font-size: 1.15rem;
     }
 
-    &__delivery-form {
-        display: flex;
-        flex-direction: column;
-        margin: 2rem 1.5rem 0 1.5rem;
-    }
-
     &__add-tip {
         font-size: 1rem;
     }
 }
 
-#order__user-name, #order__user-email, #order__user-number, #order__delivery-address {
+.order-delivery {
+
+    display: flex;
+    flex-direction: column;
+    margin: 2rem 1.5rem 0 1.5rem;
+    padding-bottom: 1rem;
+
+    &__header {
+        font-size: 1.25rem;
+        margin-bottom: 0.75rem;
+        text-align: center;
+    }
+}
+
+.order-notes {
+
+    display: flex;
+    flex-direction: column;
+    margin: 2rem 1.5rem 0 1.5rem;
+
+
+
+}
+
+#order__user-name,
+#order__user-email,
+#order__user-number,
+#order-delivery__address {
     padding: 0.5rem 0 0 0.5rem;
     margin: 0.5rem 0 0.5rem 0;
     min-height: 2.75rem;
@@ -226,7 +281,7 @@
     outline: none;
 }
 
-#order__delivery-notes {
+#order-delivery__notes {
     padding: 0.5rem 0 0 0.5rem;
     margin: 0.5rem 0 0.5rem 0;
     min-height: 4.75rem;
@@ -239,17 +294,7 @@
 }
 
 .hide {
-	display: none;
-}
-
-#minus-btn, #plus-btn {
-    padding: 0.0005rem 0.4rem;
-    border-radius: 50%;
-    background-color: transparent;
-    font-size: 1rem;
-    font-weight: 700;
-    color: #3a3a3a;
-    border: 3px solid #3a3a3a;
+    display: none;
 }
 
 #count {
@@ -266,4 +311,80 @@
     margin: 0 1.5rem 0 0;
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
     visibility: hidden;
+}
+
+
+
+
+.order-details {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #cdcdcd;
+    
+
+    .order__number {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 1.25rem;
+
+        &-number {
+            margin-left: 0.75rem;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.75rem;
+
+        }
+
+        &-label {
+        font-weight: bold;
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 2.25rem;
+        }
+    }
+
+    &__dine-in {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        
+    }
+
+    .table {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        &__number {
+            margin-left: 0.75rem;
+            font-size: 1.25rem;
+        }
+
+        &__label {
+            font-size: 1.35rem;
+        }
+    }
+
+    .reservation-time{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        &__time {
+            margin-left: 0.75rem;
+            font-size: 1.25rem;
+        }
+    }
+    
+    .table-icon,
+    .time-icon {
+        height: 32px;
+        width: 32px;
+        margin-right: 0.75rem;
+    }
+}
+
+.courierFont {
+    font-family: 'Courier New', Courier, monospace;
 }

@@ -13,7 +13,7 @@ function CheckIn() {
     const [paymentStatus, setPaymentStatus] = useState(sessionStorage.getItem("paymentStatus") || "unpaid");
     const [tableNumber, setTableNumber] = useState(sessionStorage.getItem("tableNumber") || "");
 
-    const [orderTotal, setOrderTotal] = useState(0);
+    const [orderTotal, setOrderTotal] = useState(sessionStorage.getItem("orderTotal") || 0);
     const [remainingPayment, setRemainingPayment] = useState(0);
 
     // Update all states when orderNumber changes

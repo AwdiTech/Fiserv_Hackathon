@@ -1,205 +1,316 @@
 import "./Payments.scss";
-import table from '../../assets/icons/table.png'
-import time from '../../assets/icons/time.png'
-import {useState, useEffect} from 'react'
+import tableIcon from '../../assets/icons/table.png'
+import timeIcon from '../../assets/icons/time.png'
+import { useState, useEffect } from 'react'
 import Payment from '../../components/Payment/Payment'
 
 function Payments() {
 
-    const [selectedOption, setSelectedOption] = useState('');
-
-    const handleChange = (event) => {
-      setSelectedOption(event.target.value);
-    };   
-    
-    const [sessionData, setSessionData] = useState([]);
-    const [subtotal, setSubtotal] = useState([]);
-    const [tipOptions, setTipOptions] = useState({
-        15: false,
-        18: false,
-        20: false,
-        25: false
-    })
+    const [sessionCart, setSessionCart] = useState(JSON.parse(sessionStorage.getItem('cart')) || {});
+    const [subtotal, setSubtotal] = useState(0);
     const [tipAmount, setTipAmount] = useState(0);
     const [total, setTotal] = useState(0);
+    const [selectedTip, setSelectedTip] = useState(0);
+    const [tableNumber, setTableNumber] = useState(sessionStorage.getItem("tableNumber") || 0);
+    const [orderNumber, setOrderNumber] = useState(sessionStorage.getItem("orderNumber") || 0);
+    const [reservationTime, setReservationTime] = useState(sessionStorage.getItem("time") || new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
+
+    const [selectedOrderType, setSelectedOrderType] = useState(sessionStorage.getItem('orderType') || 'Dine-In');
+    const [userName, setUserName] = useState(null);
+    const [userEmail, setUserEmail] = useState(null);
+    const [userPhoneNumber, setUserPhoneNumber] = useState(null);
+    const [deliveryAddress, setDeliveryAddress] = useState(null);
+    const [userNotes, setUserNotes] = useState(null);
+
+    // Function to generate a random number between two numbers
+    const generateRandomNumber = (min, max) => {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    };
+
+
 
     useEffect(() => {
-        const storedData = sessionStorage.getItem('cart')
+        // Load the cart from sessionStorage on component mount and whenever the cart changes
+        const cart = JSON.parse(sessionStorage.getItem('cart')) || {};
+        const cartArray = Object.values(cart);
+        setSessionCart(cartArray);
 
-        if (storedData) {
-            const parsedData = JSON.parse(storedData);
+        // Calculate the subtotal, then pass it into calculateTipAndTotal
+        const newSubtotal = cartArray.reduce((acc, item) => acc + item.price * item.quantity, 0);
+        setSubtotal(newSubtotal);
+        calculateTipAndTotal(newSubtotal);
 
-            const dataArray = Object.values(parsedData);
-            setSessionData(dataArray)
-
-            const subtotalAmount = dataArray.reduce((total, item) => {
-                return total + (item.price * item.quantity);
-            }, 0)
-            setSubtotal(subtotalAmount)
+        if (tableNumber === 0) {
+            setTableNumber(generateRandomNumber(1, 20));
         }
-    }, [])
+        if (orderNumber === 0) {
+            setOrderNumber(generateRandomNumber(1000, 9999));
+        }
 
-    useEffect(() => {
-        updateTipAmount();
-    }, [tipOptions, subtotal]); // Update tip amount whenever tipOptions or subtotal change
+        sessionStorage.setItem('orderType', selectedOrderType);
+        sessionStorage.setItem('tableNumber', tableNumber);
+        sessionStorage.setItem('orderNumber', orderNumber);
+        sessionStorage.setItem('orderTotal', total);
 
-    useEffect(() => {
-        updateTotal();
-    }, [tipAmount, subtotal]); // Update total whenever tipAmount or subtotal change
+    }, []); // Empty array ensures this only runs on mount and unmount
+
+
+    // ------ Functions ------
+
+    // Function to calculate tip and total, to be used inside useEffect and other functions
+    /**
+     * Calculates the tip amount and total based on the new subtotal and tip percentage.
+     * @param {number} newSubtotal - The new subtotal value.
+     * @param {number} [tipPercentage=selectedTip] - The tip percentage. Defaults to the selectedTip state value if not passed.
+     */
+    const calculateTipAndTotal = (newSubtotal, tipPercentage = selectedTip) => {
+        const newTipAmount = newSubtotal * (tipPercentage / 100);
+        setTipAmount(newTipAmount);
+        const serviceCharge = newSubtotal * 0.1;
+        const newTotal = newSubtotal + newTipAmount + serviceCharge;
+        setTotal(newTotal);
+        sessionStorage.setItem('orderTotal', total);
+    };
+
+    const updateOrderType = (event) => {
+        setSelectedOrderType(event.target.value);
+        sessionStorage.setItem('orderType', event.target.value);
+    };
+
 
     const toggleTipOption = (percentage) => {
-        const newTipOptions = {};
-        // Set all options to false except the clicked one
-        for (const [key, value] of Object.entries(tipOptions)) {
-            newTipOptions[key] = key === percentage;
-        }
-        setTipOptions(newTipOptions);
-        updateTipAmount(); // Call updateTipAmount after setting the newTipOptions
+        setSelectedTip(selectedTip === percentage ? 0 : percentage);
+        calculateTipAndTotal(subtotal, selectedTip === percentage ? 0 : percentage);
     };
 
-    const updateTipAmount = () => {
-        let selectedTipPercentage = 0;
-        // Find the selected tip percentage
-        for (const [percentage, selected] of Object.entries(tipOptions)) {
-            if (selected) {
-                selectedTipPercentage = parseInt(percentage);
-                break;
-            }
+
+    const updateCart = (cart) => {
+        if (Object.keys(cart).length === 0) {
+            sessionStorage.removeItem('cart');
+            setSessionCart([]);
+            calculateTipAndTotal(0);
+        } else {
+            sessionStorage.setItem('cart', JSON.stringify(cart));
+            const cartArray = Object.values(cart);
+            setSessionCart(cartArray);
+            // Recalculate subtotal, tip and total based on the updated cart
+            const newSubtotal = cartArray.reduce((acc, item) => acc + item.price * item.quantity, 0);
+            setSubtotal(newSubtotal);
+            calculateTipAndTotal(newSubtotal);
+
         }
-        // Calculate tip amount
-        const tipAmountValue = subtotal * (selectedTipPercentage / 100);
-        setTipAmount(tipAmountValue);
+        sessionStorage.setItem('orderTotal', total);
     };
 
-    const updateTotal = () => {
-        const totalAmount = parseInt(subtotal) + tipAmount + (subtotal * 0.1);
-        setTotal(totalAmount); // Update the total state
+    // Add and Subtract quantity functions
+    const subtractQuantity = (itemName) => {
+        const cart = JSON.parse(sessionStorage.getItem('cart')) || {};
+        if (cart[itemName].quantity > 1) {
+            cart[itemName].quantity -= 1;
+        } else {
+            delete cart[itemName];
+        }
+        updateCart({ ...cart });
     };
+    const addQuantity = (itemName) => {
+        const cart = JSON.parse(sessionStorage.getItem('cart')) || {};
+        if (cart[itemName]) {
+            cart[itemName].quantity += 1;
+        } else {
+            cart[itemName] = { ...cart[itemName], quantity: 1 }; // Assuming you have the item details elsewhere
+        }
+        updateCart({ ...cart });
+    };
+
+
+
+    /**
+     * Confirms the payment by checking if all the required information is entered,
+     * and then stores the necessary data in the session storage.
+     */
+    const confirmPayment = () => {
+
+        // Check if the user has entered all the required information
+        if (userName === null || userEmail === null || userPhoneNumber === null || (selectedOrderType === 'Delivery' && deliveryAddress === null)) {
+            alert('Please fill in all the required fields.');
+            return;
+        }
+
+        const userInfo = {
+            name: userName,
+            email: userEmail,
+            phoneNumber: userPhoneNumber,
+            deliveryAddress: deliveryAddress || '',
+            notes: userNotes || '',
+        }
+
+        sessionStorage.setItem('orderType', selectedOrderType);
+        sessionStorage.setItem('orderNumber', orderNumber);
+        sessionStorage.setItem('tableNumber', tableNumber);
+        sessionStorage.setItem('userInfo', JSON.stringify(userInfo));
+
+        sessionStorage.setItem('orderTotal', total);
+        sessionStorage.setItem('time', reservationTime);
+        sessionStorage.setItem('cart', JSON.stringify(sessionCart));
+
+        if (selectedOrderType === 'Reservation') {
+            sessionStorage.setItem('paymentStatus', 'paid-half');
+        } else {
+            sessionStorage.setItem('paymentStatus', 'paid-full');
+        }
+    }
+
+
 
     return (
         <>
-        <article className = 'order__container'>
-            <section className='order'>
-                <h1 className='order__number'>ORDER #:</h1>
-                    <div className = 'order__details'>
-                    <img className = 'order__table-img' src = {table}></img>
-                    <h2 className='order__details-table'>Table:</h2>
-                    <img className = 'order__time-img' src = {time}></img>
-                    <h2 className='order__details-time'>Time:</h2>
-                    </div>
-            </section>
-            <h1 className='order__summary'>ORDER SUMMARY:</h1>
+            <main className='order'>
 
-            <section className='order__items'>
-                <div className='order__items-header'>
-                    <h1 className='order__item'>ITEM</h1>
-                    <h1 className='order__price'>PRICE</h1>
-                    <div class="frame-hidden">
-                        <div class="order__button-container">
-                            <div class="order__button-left">
-                                <button id="minus-btn">-</button>
+                <section className="order-details">
+                    <article className='order__number'>
+                        <h1 className='order__number-label courierFont'>ORDER #:</h1>
+                        <p className='order__number-number courierFont'>{orderNumber}</p>
+                    </article>
+
+                    <article className='order-details__dine-in'>
+                        <div className='table'>
+                            <img className='table-icon' src={tableIcon}></img>
+                            <p className='table__label'>Table:</p>
+                            <p className="table__number courierFont">{tableNumber}</p>
+                        </div>
+
+                        {selectedOrderType === 'Reservation' ?
+                            <div className="reservation-time">
+                                <img className='time-icon' src={timeIcon}></img>
+                                <p className='reservation-time__label'>Time:</p>
+                                <p className="reservation-time__time courierFont">{reservationTime}</p>
                             </div>
-                            <div class="order__count">
-                                <h1 id="count">1</h1>
-                            </div>
-                            <div class="order__button-right">
-                                <button id="plus-btn">+</button>
+                            : <></>}
+                    </article>
+                </section>
+
+
+                <h1 className='order__summary'>ORDER SUMMARY:</h1>
+
+                <section className='order__items'>
+                    <div className='order__items-header'>
+                        <h1 className='order__item'>ITEM</h1>
+                        <h1 className='order__price'>PRICE</h1>
+                        <div className="frame-hidden">
+                            <div className="order__button-container">
+                                <div className="order__button-left">
+                                    <button id="minus-btn">-</button>
+                                </div>
+                                <div className="order__count">
+                                    <h1 id="count">1</h1>
+                                </div>
+                                <div className="order__button-right">
+                                    <button id="plus-btn">+</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                </div>
-                <div>
-                {sessionData.map((item, index) => (
-                <div className='order__row'>
-                    <h1 className='order__item-1'>{item.name}</h1>
-                    <h1 className='order__price-1'>${item.price}.00</h1>
-                    <div class="frame">
-                        <div class="order__button-container">
-                            <div class="order__button-left">
-                                <button id="minus-btn">-</button>
-                            </div>
-                            <div class="order__count">
-                                <h1 id="count">{item.quantity}</h1>
-                            </div>
-                            
-                            <div class="order__button-right">
-                                <button id="plus-btn">+</button>
-                            </div>
-                        </div>
                     </div>
-                </div>
-                ))}
-                </div>
-            </section>
-            <section className = 'order__tip'>
-            <h2 className = 'order__add-tip'>ADD TIP</h2>
-            <div>
-            {Object.entries(tipOptions).map(([percentage, selected]) => (
+                    <div>
+                        {
+                            sessionCart.length > 0 ?
+                                sessionCart.map((item, index) => (
+                                    <div className='order__row'>
+                                        <h1 className='order__item-1'>{item.name}</h1>
+                                        <h1 className='order__price-1'>${item.price}.00</h1>
+                                        <div className="frame">
+                                            <div className="order__button-container">
+                                                <button id="minus-btn" onClick={() => subtractQuantity(item.name)}>-</button>
+                                                <h1 id="count">{item.quantity}</h1>
+                                                <button id="plus-btn" onClick={() => addQuantity(item.name)}>+</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))
+                                :
+                                <div className='order__row-empty-container'>
+                                    <p className='order__row-empty'>No Items selected. Go to Home Menu to add items.</p>
+                                </div>
+                        }
+                    </div>
+                </section>
+                <section className='order__tip'>
+                    <h2 className='order__add-tip'>ADD TIP</h2>
+                    <div>
+                        {[15, 18, 20, 25].map((percentage) => (
                             <button
                                 key={percentage}
-                                className={`order__tip-option ${selected ? '--selected' : ''}`}
+                                className={`order__tip-option ${selectedTip === percentage ? '--selected' : ''}`}
                                 onClick={() => toggleTipOption(percentage)}
                             >
                                 {percentage}%
                             </button>
                         ))}
-            </div>
-            </section>
-            <section className = 'order__bill'>
-                <div className = 'order__subtotal'>
-                <h2 className = 'order__bill-label'>SUBTOTAL</h2>
-                <h2 className = 'order__bill-label'>${parseInt(subtotal).toFixed(2)}</h2>
-                </div>
-                <div className = 'order__tip-total'>
-                <h2 className = 'order__bill-label'>TIPS</h2>
-                <h2 className = 'order__bill-label'>{tipAmount.toFixed(2)}</h2>
-                </div>
-                <div className = 'order__service-charge'>
-                <h2 className = 'order__bill-label'>SERVICE CHARGE <b>10%</b></h2>
-                <h2 className = 'order__bill-label'>${(subtotal*0.1).toFixed(2)}</h2>
-                </div>
-            </section>
+                    </div>
 
-            <section className = 'order__total'>
-                    <h1 className = 'order__total-label'>TOTAL</h1>
-                    <h1 className = 'order__total-price'>${parseInt(total).toFixed(2)}</h1>
+                </section>
+                <section className='order__bill'>
+                    <div className='order__subtotal'>
+                        <h2 className='order__bill-label'>SUBTOTAL</h2>
+                        <h2 className='order__bill-label'>${parseInt(subtotal).toFixed(2)}</h2>
+                    </div>
+                    <div className='order__tip-total'>
+                        <h2 className='order__bill-label'>TIPS</h2>
+                        <h2 className='order__bill-label'>${tipAmount.toFixed(2)}</h2>
+                    </div>
+                    <div className='order__service-charge'>
+                        <h2 className='order__bill-label'>SERVICE CHARGE <b>10%</b></h2>
+                        <h2 className='order__bill-label'>${(subtotal * 0.1).toFixed(2)}</h2>
+                    </div>
                 </section>
 
-            <section className = 'order__type'>
-                <h2 classname = 'order__type-label'>Order Type</h2>
-                <div>
-        <select className = 'order__type-menu' value={selectedOption} onChange={handleChange}>
-        <option value="" disabled hidden>Select Order Type (Dine-in, Pick-Up, Delivery)</option>
-        <option value="Dine-In">Dine-In</option>
-        <option value="Pick-Up">Pick-Up</option>
-        <option value="Delivery">Delivery</option>
-      </select>
-    </div>
-            </section>
+                <section className='order__total'>
+                    <h1 className='order__total-label'>TOTAL</h1>
+                    <h1 className='order__total-price'>${parseInt(total).toFixed(2)}</h1>
+                </section>
 
-            <form className = 'order__user-form'>
-            <label>Name <span className = 'order__red-font'>*</span></label>
-            <input type = 'text' id = 'order__user-name' placeholder = 'Enter name'></input>
-            <label>Email <span className = 'order__red-font'>*</span></label>
-            <input type = 'email' id = 'order__user-email' placeholder = 'Enter Email'></input>
-            <label>Phone Number <span className = 'order__red-font'>*</span></label>
-            <input type = 'tel' id = 'order__user-number' placeholder = 'Enter phone number'></input>
-            </form>
+                <section className='order__type'>
+                    <h2 className='order__type-label'>Select Order Type</h2>
+                    <div>
+                        <select className='order__type-menu' value={selectedOrderType} onChange={updateOrderType}>
+                            <option value="" disabled hidden>Select Order Type</option>
+                            <option value="Dine-In">Dine-In</option>
+                            <option value="Reservation">Reservation</option>
+                            <option value="Pick-Up">Pick-Up</option>
+                            <option value="Delivery">Delivery</option>
+                        </select>
+                    </div>
+                </section>
 
-            <section className = 'order__delivery'>
-                <h2 classname = 'order__delivery-information'>Delivery Information:</h2>
-            </section>
+                <form className='order__user-form'>
+                    <label>Name <span className='order__red-font'>*</span></label>
+                    <input type='text' id='order__user-name' placeholder='Enter name' value={userName} onChange={(e) => setUserName(e.target.value)}></input>
+                    <label>Email <span className='order__red-font'>*</span></label>
+                    <input type='email' id='order__user-email' placeholder='Enter Email' value={userEmail} onChange={(e) => setUserEmail(e.target.value)}></input>
+                    <label>Phone Number <span className='order__red-font'>*</span></label>
+                    <input type='tel' id='order__user-number' placeholder='Enter phone number' value={userPhoneNumber} onChange={(e) => setUserPhoneNumber(e.target.value)}></input>
+                </form>
 
-            <form className = 'order__delivery-form'>
-            <label>Address <span className = 'order__red-font'>*</span></label>
-            <input type = 'text' id = 'order__delivery-address' placeholder = 'Address'></input>
-            <label>Notes / Special Requests</label>
-            <textarea id = 'order__delivery-notes' placeholder = 'Enter any additional notes or special requests (e.g., Leave on patio, ring doorbell)'/>
-            </form>
-            <Payment/>
-        </article>
-       </> 
-       )
+                <section className='order__delivery'>
+                </section>
+
+
+                {selectedOrderType === 'Delivery' ?
+                    <form className='order-delivery'>
+                        <h2 className='order-delivery__header'>Delivery Information:</h2>
+                        <label>Address <span className='order__red-font'>*</span></label>
+                        <input type='text' id='order-delivery__address' placeholder='Address' value={deliveryAddress} onChange={(e) => setDeliveryAddress(e.target.value)}></input>
+                    </form>
+                    : <></>
+                }
+
+                <section className='order-notes'>
+                    <label>Notes / Special Requests</label>
+                    <textarea id='order-delivery__notes' placeholder='Enter any additional notes or special requests...' value={userNotes} onChange={(e) => setUserNotes(e.target.value)} />
+                </section>
+                <Payment confirmPayment={confirmPayment} orderType={selectedOrderType} />
+            </main>
+        </>
+    )
 }
 export default Payments;

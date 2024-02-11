@@ -4,16 +4,21 @@ import mastercardIcon from '../../assets/icons/mastercard.png';
 import paypalIcon from '../../assets/icons/paypal.png';
 import googlePayIcon from '../../assets/icons/google.png';
 import cryptocurrencyIcon from '../../assets/icons/bitcoin.png';
+import { useNavigate } from "react-router-dom";
 import "./Payment.scss";
+
 
 /**
  * Renders the Payment component.
  * 
- * @param {Function} props.confirmPayment - The function to be called when the payment is confirmed.
+ * @param {Function} props.confirmPayment - The function to be called when payment is confirmed.
+ * @param {string} props.orderType - The type of order (e.g., "Reservation", "Dine-In").
  */
-function Payment({ confirmPayment }) {
+function Payment({ confirmPayment, orderType }) {
 
     const [cardValid, setCardValid] = useState(true);
+
+    const navigate = useNavigate();
 
     const handlePayment = (e) => {
         e.preventDefault();
@@ -27,10 +32,12 @@ function Payment({ confirmPayment }) {
         if (LuhnCheck(cardNumber)) {
             setCardValid(true);
             alert('Payment was Successful!');
-            
+
             if (confirmPayment) {
                 confirmPayment();
             }
+
+            navigate('/check-in');
         } else {
             setCardValid(false);
             alert('Invalid Card Number');
@@ -45,13 +52,13 @@ function Payment({ confirmPayment }) {
         let sum = 0;
         let numDigits = cardNumber.length;
         let parity = numDigits % 2;
-        
+
         for (let i = 0; i < numDigits; i++) {
             let digit = parseInt(cardNumber.charAt(i));
-            
+
             if (i % 2 === parity) digit *= 2;
             if (digit > 9) digit -= 9;
-            
+
             sum += digit;
         }
 
@@ -64,7 +71,7 @@ function Payment({ confirmPayment }) {
         <main className="payment-page">
             <h1 className="payment-page__title">Choose Payment Method</h1>
             <p className="fiserv-trademark">Powered by Fiserv</p>
-            
+
             <section className="payment-methods">
                 <button className="payment-methods__button payment-methods__button--selected">
                     <img src={mastercardIcon} alt='' className="payment-methods__icon" />
@@ -137,6 +144,13 @@ function Payment({ confirmPayment }) {
                     <p>Card holder name</p>
                     <input type="text" className="payment-form__name" name="nameOnCard" placeholder="Name on Card" />
                 </div>
+
+                {orderType === "Reservation" ?
+                    <p id="reservation-note">
+                        Note: For Reservations, only 50% of the payment will be made. The rest will be charged when you check in.</p>
+                    : <></>}
+
+
                 <button className="payment-form__button">Confirm Payment</button>
             </form>
 
