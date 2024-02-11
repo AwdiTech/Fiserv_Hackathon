@@ -1,30 +1,33 @@
 import "./Payments.scss";
 import table from '../../assets/icons/table.png'
 import time from '../../assets/icons/time.png'
+import {useState} from 'react'
 
 function Payments() {
 
-    
+    const [selectedOption, setSelectedOption] = useState('');
+
+    const handleChange = (event) => {
+      setSelectedOption(event.target.value);
+    };    
 
     return (
         <article className = 'order__container'>
             <section className='order'>
                 <h1 className='order__number'>ORDER #:</h1>
-                <div className='order__details'>
+                    <div className = 'order__details'>
                     <img className = 'order__table-img' src = {table}></img>
                     <h2 className='order__details-table'>Table:</h2>
                     <img className = 'order__time-img' src = {time}></img>
                     <h2 className='order__details-time'>Time:</h2>
-                </div>
+                    </div>
             </section>
             <h1 className='order__summary'>ORDER SUMMARY:</h1>
 
             <section className='order__items'>
                 <div className='order__items-header'>
-                <div className ='order__details'>
                     <h1 className='order__item'>ITEM</h1>
                     <h1 className='order__price'>PRICE</h1>
-                    </div>
                     <div class="frame-hidden">
                         <div class="order__button-container">
                             <div class="order__button-left">
@@ -41,10 +44,8 @@ function Payments() {
 
                 </div>
                 <div className='order__row'>
-                <div className ='order__details'>
                     <h1 className='order__item-1'>CHICKEN WINGS</h1>
                     <h1 className='order__price-1'>$20,00</h1>
-                </div>
                     <div class="frame">
                         <div class="order__button-container">
                             <div class="order__button-left">
@@ -60,10 +61,8 @@ function Payments() {
                     </div>
                 </div>
                 <div className='order__row'>
-                <div className ='order__details'>
                     <h1 className='order__item-1'>SUMMER SALAD</h1>
                     <h1 className='order__price-1'>$10,00</h1>
-                </div>
                     <div class="frame">
                         <div class="order__button-container">
                             <div class="order__button-left">
@@ -79,10 +78,8 @@ function Payments() {
                     </div>
                 </div>
                 <div className='order__row'>
-                    <div className ='order__details'>
                     <h1 className='order__item-1'>FRENCH FRIES</h1>
                     <h1 className='order__price-1'>$5,00</h1>
-                    </div>
                     <div class="frame">
                         <div class="order__button-container">
                             <div class="order__button-left">
@@ -99,7 +96,7 @@ function Payments() {
                 </div>
             </section>
             <section className = 'order__tip'>
-            <h2>ADD TIP</h2>
+            <h2 className = 'order__add-tip'>ADD TIP</h2>
             <h1 className = 'order__tip-option'>$5</h1>
             <h1 className = 'order__tip-option'>$10</h1>
             <h1 className = 'order__tip-option'>$15</h1>
@@ -107,16 +104,16 @@ function Payments() {
             </section>
             <section className = 'order__bill'>
                 <div className = 'order__subtotal'>
-                <h2>SUBTOTAL</h2>
-                <h2>$35,00</h2>
+                <h2 className = 'order__bill-label'>SUBTOTAL</h2>
+                <h2 className = 'order__bill-label'>$35,00</h2>
                 </div>
                 <div className = 'order__tip-total'>
-                <h2>TIPS</h2>
-                <h2>$5,00</h2>
+                <h2 className = 'order__bill-label'>TIPS</h2>
+                <h2 className = 'order__bill-label'>$5,00</h2>
                 </div>
                 <div className = 'order__service-charge'>
-                <h2>SERVICE CHARGE <b>10%</b></h2>
-                <h2>$3,50</h2>
+                <h2 className = 'order__bill-label'>SERVICE CHARGE <b>10%</b></h2>
+                <h2 className = 'order__bill-label'>$3,50</h2>
                 </div>
             </section>
 
@@ -127,6 +124,14 @@ function Payments() {
 
             <section className = 'order__type'>
                 <h2 classname = 'order__type-label'>Order Type</h2>
+                <div>
+        <select className = 'order__type-menu' value={selectedOption} onChange={handleChange}>
+        <option value="" disabled hidden>Select Order Type (Dine-in, Pick-Up, Delivery)</option>
+        <option value="Dine-In">Dine-In</option>
+        <option value="Pick-Up">Pick-Up</option>
+        <option value="Delivery">Delivery</option>
+      </select>
+    </div>
             </section>
 
             <form className = 'order__user-form'>
