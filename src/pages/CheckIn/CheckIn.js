@@ -72,7 +72,7 @@ function CheckIn() {
             alert("The remaining half of the payment has been processed! Your food will now be served to your table. Enjoy!");
             setPaymentStatus("paid-full");
             sessionStorage.setItem("paymentStatus", "paid-full");
-        } else if (paymentStatus === "paid-full" && orderType === "Dine-In") {
+        } else if (paymentStatus === "paid-full" && (orderType === "Dine-In" || orderType === "Reservation")) {
             alert("Your order has been processed! Your food will now be served. Enjoy!");
             setPaymentStatus("completed");
             sessionStorage.setItem("paymentStatus", "completed");
