@@ -72,7 +72,7 @@ function Payments() {
     };
 
     const updateTotal = () => {
-        const totalAmount = subtotal + tipAmount;
+        const totalAmount = parseInt(subtotal) + tipAmount + (subtotal * 0.1);
         setTotal(totalAmount); // Update the total state
     };
 
