@@ -149,7 +149,7 @@ function Payments() {
             <section className = 'order__bill'>
                 <div className = 'order__subtotal'>
                 <h2 className = 'order__bill-label'>SUBTOTAL</h2>
-                <h2 className = 'order__bill-label'>${subtotal}.00</h2>
+                <h2 className = 'order__bill-label'>${parseInt(subtotal).toFixed(2)}</h2>
                 </div>
                 <div className = 'order__tip-total'>
                 <h2 className = 'order__bill-label'>TIPS</h2>
@@ -163,7 +163,7 @@ function Payments() {
 
             <section className = 'order__total'>
                     <h1 className = 'order__total-label'>TOTAL</h1>
-                    <h1 className = 'order__total-price'>${total}</h1>
+                    <h1 className = 'order__total-price'>${parseInt(total).toFixed(2)}</h1>
                 </section>
 
             <section className = 'order__type'>
