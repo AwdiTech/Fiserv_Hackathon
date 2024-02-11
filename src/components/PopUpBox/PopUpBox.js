@@ -24,7 +24,7 @@ function PopUpBox({ text, exit, visibility }) {
                 <img src={exitIcon} className="icon" alt='' />
             </div>
             <h3 className='popup-box__text'>{text}</h3>
-            <button onClick={handleEnter} className='popup-box__enter-button'>ENTER</button>
+            <button onClick={handleEnter} className='popup-box__enter-button'>OK</button>
         </section>
     )
 }

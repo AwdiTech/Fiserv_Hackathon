@@ -1,0 +1,168 @@
+// ----- Payment.scss Styling -----
+
+@use '../../styles/variables.scss' as *;
+
+.payment-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    font-family: sans-serif;
+    margin: 2rem 2rem 6rem;
+
+    .payment-page__title {
+        margin-bottom: 0.6rem;
+        color: $primary-dark;
+        font-size: 1.6rem;
+        font-family: sans-serif;
+        font-weight: 400;
+    }
+
+    .fiserv-trademark {
+        font-size: 0.8rem;
+        margin-bottom: 1.1rem;
+        font-style: italic;
+        color: $primary-theme;
+        font-weight: bold;
+    }
+
+    .payment-methods {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-bottom: 1.5rem;
+
+        .payment-methods__button {
+            width: 100%;
+            height: 50px;
+
+            display: flex;
+            align-items: center;
+
+            padding: 0.5rem 1rem;
+            background-color: $primary-light;
+            color: rgba($primary-dark, 0.5);
+            border: 1px solid #e1e1e1;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            font-family: sans-serif;
+
+            .payment-methods__icon {
+                width: 20px;
+                margin-right: 0.75rem;
+            }
+        }
+
+        .payment-methods__button--selected {
+            background-color: rgba($primary-theme, 0.2);
+            color: $primary-dark;
+        }
+    }
+
+    .payment-form {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+
+        .payment-form__row-group {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+
+            .card-expiration {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .cvv_wrapper {
+                font-size: 0.8rem;
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                width: 25%;
+            }
+
+            .card-expiration__selects {
+                display: flex;
+                flex-direction: row;
+                gap: 0.75rem;
+            }
+
+            input,
+            select {
+                font-size: 1rem;
+            }
+
+        }
+
+        .payment-form__row {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 1rem;
+            position: relative;
+
+
+            .card-number--error {
+                border-color: #ff4d4d;
+            }
+
+            .card-experation,
+            .payment-form__cvv_wrapper {
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .card-experation select,
+            .payment-form__cvv {
+                flex: 1;
+            }
+
+            .expiration-year {
+                margin-left: 0.5rem;
+            }
+
+            .payment-form__cvv {
+                margin-left: 0.5rem;
+            }
+        }
+
+        .payment-form__button {
+            padding: 0.8rem;
+            width: 100%;
+            color: white;
+            background-color: $button-color1;
+            border: none;
+            border-radius: 8px;
+            margin-top: 1rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            font-family: 'Calibri', sans-serif;
+        }
+    }
+
+    p {
+        margin-bottom: 0.5rem;
+        font-family: 'Calibri', sans-serif;
+        color: rgba($primary-dark, 0.5);
+        font-size: 1.1rem;
+    }
+
+    input,
+    select {
+        padding: 0.5rem;
+        border-radius: 8px;
+        border: 1px solid #e1e1e1;
+        font-size: 1.1rem;
+        font-family: 'Calibri', sans-serif;
+    }
+
+}
+
+.mastercard-icon {
+    position: absolute;
+    right: 4px;
+    bottom: -5px;
+    width: 50px;
+}
