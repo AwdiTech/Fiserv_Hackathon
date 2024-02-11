@@ -11,16 +11,16 @@ function Payments() {
     const [tipAmount, setTipAmount] = useState(0);
     const [total, setTotal] = useState(0);
     const [selectedTip, setSelectedTip] = useState(0);
-    const [tableNumber, setTableNumber] = useState(sessionStorage.getItem("tableNumber") || 0);
-    const [orderNumber, setOrderNumber] = useState(sessionStorage.getItem("orderNumber") || 0);
-    const [reservationTime, setReservationTime] = useState(sessionStorage.getItem("time") || new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
+    const [tableNumber, setTableNumber] = useState(0);
+    const [orderNumber, setOrderNumber] = useState(0);
+    const [reservationTime, setReservationTime] = useState(JSON.parse(sessionStorage.getItem("bookingInfo"))?.time || new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
 
     const [selectedOrderType, setSelectedOrderType] = useState(sessionStorage.getItem('orderType') || 'Dine-In');
-    const [userName, setUserName] = useState(null);
-    const [userEmail, setUserEmail] = useState(null);
-    const [userPhoneNumber, setUserPhoneNumber] = useState(null);
+    const [userName, setUserName] = useState(JSON.parse(sessionStorage.getItem("bookingInfo"))?.name || '');
+    const [userEmail, setUserEmail] = useState(JSON.parse(sessionStorage.getItem("bookingInfo"))?.email || '');
+    const [userPhoneNumber, setUserPhoneNumber] = useState(JSON.parse(sessionStorage.getItem("bookingInfo"))?.phoneNum || '');
     const [deliveryAddress, setDeliveryAddress] = useState(null);
-    const [userNotes, setUserNotes] = useState(null);
+    const [userNotes, setUserNotes] = useState(JSON.parse(sessionStorage.getItem("bookingInfo"))?.notes || '');
 
     // Function to generate a random number between two numbers
     const generateRandomNumber = (min, max) => {
@@ -40,17 +40,28 @@ function Payments() {
         setSubtotal(newSubtotal);
         calculateTipAndTotal(newSubtotal);
 
-        if (tableNumber === 0) {
-            setTableNumber(generateRandomNumber(1, 20));
+        let tn = sessionStorage.getItem('tableNumber');
+        let on = sessionStorage.getItem('orderNumber');
+
+        if (!tableNumber) {
+            const randomNumber = generateRandomNumber(1, 20);
+            setTableNumber(randomNumber);
+            sessionStorage.setItem('tableNumber', randomNumber);
         }
-        if (orderNumber === 0) {
-            setOrderNumber(generateRandomNumber(1000, 9999));
+        if (!orderNumber) {
+            const randomNumber = generateRandomNumber(1000, 9999);
+            setOrderNumber(randomNumber);
+            sessionStorage.setItem('orderNumber', randomNumber);
         }
 
+
         sessionStorage.setItem('orderType', selectedOrderType);
-        sessionStorage.setItem('tableNumber', tableNumber);
-        sessionStorage.setItem('orderNumber', orderNumber);
-        sessionStorage.setItem('orderTotal', total);
+
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+        });
 
     }, []); // Empty array ensures this only runs on mount and unmount
 
@@ -66,10 +77,10 @@ function Payments() {
     const calculateTipAndTotal = (newSubtotal, tipPercentage = selectedTip) => {
         const newTipAmount = newSubtotal * (tipPercentage / 100);
         setTipAmount(newTipAmount);
-        const serviceCharge = newSubtotal * 0.1;
+        const serviceCharge = newSubtotal * 0.01;
         const newTotal = newSubtotal + newTipAmount + serviceCharge;
         setTotal(newTotal);
-        sessionStorage.setItem('orderTotal', total);
+        sessionStorage.setItem('orderTotal', newTotal);
     };
 
     const updateOrderType = (event) => {
@@ -150,7 +161,10 @@ function Payments() {
         sessionStorage.setItem('userInfo', JSON.stringify(userInfo));
 
         sessionStorage.setItem('orderTotal', total);
-        sessionStorage.setItem('time', reservationTime);
+
+        const bookingInfo = sessionStorage.getItem("bookingInfo");
+        sessionStorage.setItem('time', { ...bookingInfo, time: reservationTime});
+        
         sessionStorage.setItem('cart', JSON.stringify(sessionCart));
 
         if (selectedOrderType === 'Reservation') {
@@ -259,14 +273,14 @@ function Payments() {
                         <h2 className='order__bill-label'>${tipAmount.toFixed(2)}</h2>
                     </div>
                     <div className='order__service-charge'>
-                        <h2 className='order__bill-label'>SERVICE CHARGE <b>10%</b></h2>
+                        <h2 className='order__bill-label'>SERVICE CHARGE <b>1%</b></h2>
                         <h2 className='order__bill-label'>${(subtotal * 0.1).toFixed(2)}</h2>
                     </div>
                 </section>
 
                 <section className='order__total'>
                     <h1 className='order__total-label'>TOTAL</h1>
-                    <h1 className='order__total-price'>${parseInt(total).toFixed(2)}</h1>
+                    <h1 className='order__total-price'>${total.toFixed(2)}</h1>
                 </section>
 
                 <section className='order__type'>

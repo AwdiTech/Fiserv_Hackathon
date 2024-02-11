@@ -82,7 +82,7 @@ function TableForm() {
   };
 
   const handleCancel = () => {
-    alert("Reservation cancel");
+    alert("Reservation cancelled...");
     navigate("/");
   };
 
@@ -159,13 +159,14 @@ function TableForm() {
       };
       let cart = sessionStorage.getItem("cart");
 
+      sessionStorage.setItem("orderType", "Reservation");
+      sessionStorage.setItem("bookingInfo", JSON.stringify(booking));
+      
       if (cart === null) {
-        alert("Choose your Food");
+        alert("Select your items and proceed to Cart to pay for your reservation.");
         navigate("/");
       } else {
-        sessionStorage.setItem("orderType", "Reservation");
-        sessionStorage.setItem("bookingInfo", JSON.stringify(booking));
-        alert("Reservation Booked");
+        alert("Reservation Booked! Proceed to Cart to pay for your reservation.");
         navigate("/confirmation");
       }
     }

@@ -3,9 +3,7 @@
 .tableForm {
   display: flex;
   flex-direction: column;
-  padding-left: 16px;
-  padding-right: 16px;
-  padding-bottom: 16px;
+  margin: 0 2rem 2rem;
 
   h3 {
     font-weight: 700;
@@ -105,7 +103,7 @@
 
   &__message {
     font-weight: 700;
-    padding-bottom: 16px;
+    margin-bottom: 1.75rem;
   }
 
   &__buttons {
@@ -113,18 +111,19 @@
     justify-content: space-between;
 
     &-cancel, &-confirm {
-      background-color: $button-color3;
+      background-color: darken($button-color4, 2%);
       border: none;
-      padding: 0.5rem 0.75rem;
+      padding: 0.75em;
       border-radius: 8px;
       font-weight: bold;
-      font-size: 0.8rem;
+      font-size: 0.9rem;
       box-shadow: 0 2px 4px rgba(0,0,0,0.2);
       cursor: pointer;
       transition: all 0.1s ease-in-out;
+      width: 40%;
 
       &:hover {
-        background-color: darken($button-color3, 10%);
+        background-color: darken($button-color4, 10%);
       }
 
       &:active {
@@ -137,10 +136,10 @@
     }
 
     &-confirm {
-      background-color: $button-color4;
+      background-color: rgba($button-color2, 0.9);
 
       &:hover {
-        background-color: darken($button-color4, 10%);
+        background-color: darken($button-color2, 10%);
       }
     }
 

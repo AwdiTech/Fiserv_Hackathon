@@ -1,11 +1,10 @@
 .reservation {
-  padding-left: 16px;
-  padding-right: 16px;
   padding-bottom: 110px;
 
   &__titleContainer {
     background-color: lightblue;
     padding: 16px;
+    text-align: center;
   }
 
   &__title {
@@ -22,7 +21,7 @@
 
   &__content {
     padding-bottom: 10px;
-    text-align: left;
+    text-align: center;
 
     h2 {
       font-weight: 700;
@@ -31,6 +30,12 @@
     &-address {
       display: flex;
       justify-content: left;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px dotted #cdcdcd;
+
+      img {
+        margin-left: 5.7rem;
+      }
     }
   }
 }

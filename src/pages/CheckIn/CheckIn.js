@@ -9,7 +9,7 @@ function CheckIn() {
 
     const [orderNumber, setOrderNumber] = useState(sessionStorage.getItem("orderNumber") || "");
     const [orderType, setOrderType] = useState(sessionStorage.getItem("orderType") || "Dine-In");
-    const [guests, setGuests] = useState(sessionStorage.getItem("guests") || 1);
+    const [guests, setGuests] = useState(JSON.parse(sessionStorage.getItem("bookingInfo"))?.guests || 1);
     const [paymentStatus, setPaymentStatus] = useState(sessionStorage.getItem("paymentStatus") || "unpaid");
     const [tableNumber, setTableNumber] = useState(sessionStorage.getItem("tableNumber") || "");
 
@@ -21,12 +21,21 @@ function CheckIn() {
 
         // Uses Cart to calculate the order total
         const getOrderTotal = () => {
-            const cart = JSON.parse(sessionStorage.getItem("cart")) || {};
-            let total = 0;
-            Object.values(cart).forEach(item => {
-                total += item.price * item.quantity;
-            });
-            return total;
+            const ot = sessionStorage.getItem("orderTotal");
+
+            if (ot === null){
+
+                
+                const cart = JSON.parse(sessionStorage.getItem("cart")) || {};
+                let total = 0;
+                Object.values(cart).forEach(item => {
+                    total += item.price * item.quantity;
+                });
+                return total;
+            }
+            else {
+                return ot;
+            }
         };
 
         // Uses Cart and OrderType to calculate the remaining payment
