@@ -100,6 +100,9 @@ function Payments() {
             sessionStorage.removeItem('cart');
             setSessionCart([]);
             calculateTipAndTotal(0);
+            setSubtotal(0);
+            setTotal(0);
+            setTipAmount(0);
         } else {
             sessionStorage.setItem('cart', JSON.stringify(cart));
             const cartArray = Object.values(cart);
@@ -274,7 +277,7 @@ function Payments() {
                     </div>
                     <div className='order__service-charge'>
                         <h2 className='order__bill-label'>SERVICE CHARGE <b>1%</b></h2>
-                        <h2 className='order__bill-label'>${(subtotal * 0.1).toFixed(2)}</h2>
+                        <h2 className='order__bill-label'>${(subtotal * 0.01).toFixed(2)}</h2>
                     </div>
                 </section>
 

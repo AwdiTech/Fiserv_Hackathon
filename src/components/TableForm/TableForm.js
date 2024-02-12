@@ -83,7 +83,7 @@ function TableForm() {
 
   const handleCancel = () => {
     alert("Reservation cancelled...");
-    navigate("/");
+    navigate("/", { state: { currentPage: "home" } } );
   };
 
   const isFormValid = () => {
@@ -164,10 +164,10 @@ function TableForm() {
       
       if (cart === null) {
         alert("Select your items and proceed to Cart to pay for your reservation.");
-        navigate("/");
+        navigate("/", { state: { currentPage: "home" } } );
       } else {
         alert("Reservation Booked! Proceed to Cart to pay for your reservation.");
-        navigate("/confirmation");
+        navigate("/confirmation", { state: { currentPage: "cart" } } );
       }
     }
   };

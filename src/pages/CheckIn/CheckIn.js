@@ -40,12 +40,13 @@ function CheckIn() {
 
         // Uses Cart and OrderType to calculate the remaining payment
         const getRemainingPayment = (total) => {
-            if (paymentStatus === "paid-half" && orderType === "reservation") {
+            if (paymentStatus === "paid-half" && orderType === "Reservation") {
                 return total / 2;
-            } else if (paymentStatus === "paid-full") {
+            } else if (paymentStatus === "paid-full" || paymentStatus === "completed") {
                 return 0;
-            } else {
-                return total;    // If paymentStatus is unpaid
+            } 
+            else {
+                return total;   // If paymentStatus is unpaid
             }
         };
 
@@ -69,13 +70,14 @@ function CheckIn() {
         if (paymentStatus === "unpaid") {
             alert("Please go to Cart and pay your bill first!");
         } else if (paymentStatus === "paid-half") {
-            alert("The remaining half of the payment has been processed! Your food will now be served to your table. Enjoy!");
+            alert("The remaining half of the payment has been processed! Please press \"Check In\" when you arrive and are seated at a table.");
             setPaymentStatus("paid-full");
             sessionStorage.setItem("paymentStatus", "paid-full");
         } else if (paymentStatus === "paid-full" && (orderType === "Dine-In" || orderType === "Reservation")) {
             alert("Your order has been processed! Your food will now be served. Enjoy!");
             setPaymentStatus("completed");
             sessionStorage.setItem("paymentStatus", "completed");
+            setRemainingPayment(0);
         }
     }
 
@@ -144,12 +146,12 @@ function CheckIn() {
 
                 <div className="row">
                     <p>Order Total:</p>
-                    <p>${orderTotal}</p>
+                    <p>${parseFloat(orderTotal).toFixed(2)}</p>
                 </div>
 
                 <div className="row">
                     <p>Remaining Payment:</p>
-                    <p>${remainingPayment}</p>
+                    <p>${parseFloat(remainingPayment).toFixed(2)}</p>
                 </div>
 
             </div>

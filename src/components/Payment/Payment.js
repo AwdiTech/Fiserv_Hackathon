@@ -37,7 +37,7 @@ function Payment({ confirmPayment, orderType }) {
                 confirmPayment();
             }
 
-            navigate('/check-in');
+            navigate('/check-in', { state: { currentPage: "check-in" } });
         } else {
             setCardValid(false);
             alert('Invalid Card Number');
