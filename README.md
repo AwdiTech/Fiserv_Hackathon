@@ -3,6 +3,7 @@
 This project is a client-side application prototype, created for a Fiserv Hackathon, designed to provide a seamless and efficient dining experience. It integrates advanced features to streamline the order process, manage payments, and enhance user interaction with the restaurant's services. 
 
 ![Home Menu Page](https://i.imgur.com/vpfIsuB.png)
+![Payment Page](https://i.imgur.com/Ad4UZU8.png)
 
 
 ## Features
